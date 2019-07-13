@@ -4,6 +4,7 @@ import "./Home.css";
 import { CenterMiddleSection } from "./../../components/centerMiddleSection/CenterMiddleSection";
 import { Portfolio } from "./../../components/portfolio/Portfolio";
 import { PortfolioPiece } from "./../../components/portfolioPiece/PortfolioPiece";
+import { ContactForm } from "./../../components/contactForm/ContactForm";
 
 export class Home extends React.Component {
   render() {
@@ -178,6 +179,7 @@ export class Home extends React.Component {
           textColor="black"
         >
           <h3>Contact Me</h3>
+          <ContactForm />
         </CenterMiddleSection>
       </div>
     );
