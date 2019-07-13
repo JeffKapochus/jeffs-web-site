@@ -1,42 +1,26 @@
 import React from "react";
+import './Portfolio.css';
 
-export class Status extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      responseBody: "Community Warehouse Project Back-End is Currently Down"
-    };
-
-    this.fetchAndProcessData = this.fetchAndProcessData.bind(this);
-  }
-  componentDidMount() {
-    this.fetchAndProcessData("http://localhost:8080/", "GET");
-  }
-  async fetchAndProcessData(
-    url,
-    type,
-    body,
-    successCallback = () => {},
-    errorCallback = () => {}
-  ) {
-    try {
-      let response = await fetch(url, {
-        method: type,
-        body: body,
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      });
-      if (response.status === 200) {
-        this.setState({
-          responseBody:
-            "Community Warehouse Project Back-End is Currently Up and Running"
-        });
-      }
-    } catch {}
+export class Portfolio extends React.Component {
+  getGridNumber(){
+    var count = React.Children.count(this.props.children); 
+    if(count > 4){
+      return 3;
+    }
+    else{
+      return (12/count);
+    }
   }
   render() {
-    return <div id="homePage">{this.state.responseBody}</div>;
+    return (
+      <div className="portfolio">
+        {React.Children.map(this.props.children, (child,i) => {
+          if(child.type.name === "PortfolioPiece"){
+            return (<div className={"grid-" + this.getGridNumber()}>{child}</div>);
+          }
+        })}
+        
+      </div>
+    );
   }
 }

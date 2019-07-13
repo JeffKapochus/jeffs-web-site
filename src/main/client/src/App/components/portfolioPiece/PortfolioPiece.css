@@ -1,0 +1,22 @@
+.portfolioPiece{
+    text-align:center;
+}
+.portfolioPiece img{
+    width: 90%;
+    max-width: 300px;
+}
+.portfolioPiece a{
+    color:white;
+    text-decoration: none;
+    font-weight:bold;
+}
+.portfolioPiece a p{
+    margin:0.33em 0 1em 0;
+}
+@media only screen and (min-width: 769px) {
+}
+@media only screen and (min-width: 1920px) {
+    .portfolioPiece a p{
+        font-size:20px;
+    }
+}

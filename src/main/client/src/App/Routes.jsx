@@ -33,14 +33,12 @@ const Routes = () => (
         </div>
         <div className="grid-4">
           <p>Social Media:</p>
-          <p>
-            <ul id="footSocMedLinks">
-              <li><a href="https://twitter.com/JeffKapochus" title="Twitter" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter}/></a></li>
-              <li><a href="https://www.linkedin.com/in/jeff-kapochus/" title="LinkedIn" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin}/></a></li>
-              <li><a href="https://github.com/JeffKapochus" title="GitHub" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub}/></a></li>
-              <li><a href="mailto:jeff.kapochus@gmail.com" title="Email"><FontAwesomeIcon icon={faEnvelope}/></a></li>
-            </ul>
-          </p>
+          <ul id="footSocMedLinks">
+            <li><a href="https://twitter.com/JeffKapochus" title="Twitter" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter}/></a></li>
+            <li><a href="https://www.linkedin.com/in/jeff-kapochus/" title="LinkedIn" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin}/></a></li>
+            <li><a href="https://github.com/JeffKapochus" title="GitHub" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub}/></a></li>
+            <li><a href="mailto:jeff.kapochus@gmail.com" title="Email"><FontAwesomeIcon icon={faEnvelope}/></a></li>
+          </ul>
         </div>
         <div className="grid-4">
           <p><img id="footerImg" src={process.env.PUBLIC_URL + "/images/obi.jpg"} alt="Obi-Wan Kapochus, the Best Boy"/></p>

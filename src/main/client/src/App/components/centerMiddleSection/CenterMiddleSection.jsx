@@ -11,8 +11,8 @@ export class CenterMiddleSection extends React.Component {
       textAlign: this.props.align,
     };
     return (
-      <div class="tableHolder" style={holderStyle}>
-        <div class="contentHolder">
+      <div className="tableHolder" style={holderStyle}>
+        <div className="contentHolder">
           {this.props.children}
         </div>
       </div>
