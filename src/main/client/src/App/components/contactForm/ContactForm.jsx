@@ -1,5 +1,8 @@
 import React from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./ContactForm.css";
+
+const SITE_KEY = "6Lcu3jUUAAAAAKgA6-myODOcndPRyeCo3MS1kR_X";
 
 export class ContactForm extends React.Component {
   constructor(props) {
@@ -8,10 +11,12 @@ export class ContactForm extends React.Component {
       name: "",
       email: "",
       subject: "",
-      message: ""
+      message: "",
+      captchaToken: null
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
     this.checkClientSideValid = this.checkClientSideValid.bind(this);
   }
   handleInputChange(event) {
@@ -22,6 +27,12 @@ export class ContactForm extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+  handleCaptchaChange = value => {
+    this.setState({
+      captchaToken: value
+    });
+    console.log("Yup");
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -36,7 +47,8 @@ export class ContactForm extends React.Component {
       this.state.name === "" ||
       this.state.email === "" ||
       this.state.subject === "" ||
-      this.state.message === ""
+      this.state.message === "" ||
+      this.state.captchaToken === null
     ) {
       return false;
     }
@@ -49,7 +61,7 @@ export class ContactForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="grid-12">
               <div className="grid-12">
-                <label for="txtName">Your Name (Required):</label>
+                <label htmlFor="txtName">Your Name (Required):</label>
               </div>
               <div className="grid-12">
                 <input
@@ -63,7 +75,7 @@ export class ContactForm extends React.Component {
             </div>
             <div className="grid-12">
               <div className="grid-12">
-                <label for="txtEmail">Your Email Address (Required):</label>
+                <label htmlFor="txtEmail">Your Email Address (Required):</label>
               </div>
               <div className="grid-12">
                 <input
@@ -77,7 +89,7 @@ export class ContactForm extends React.Component {
             </div>
             <div className="grid-12">
               <div className="grid-12">
-                <label for="txtSubject">Message Subject (Required):</label>
+                <label htmlFor="txtSubject">Message Subject (Required):</label>
               </div>
               <div className="grid-12">
                 <input
@@ -91,7 +103,7 @@ export class ContactForm extends React.Component {
             </div>
             <div className="grid-12">
               <div className="grid-12">
-                <label for="txtContent">Message Content (Required):</label>
+                <label htmlFor="txtContent">Message Content (Required):</label>
               </div>
               <div className="grid-12">
                 <textarea
@@ -104,6 +116,12 @@ export class ContactForm extends React.Component {
               </div>
             </div>
             <div className="grid-12">
+              <div className="grid-12">
+                <ReCAPTCHA
+                  sitekey={SITE_KEY}
+                  onChange={this.handleCaptchaChange}
+                />
+              </div>
               <button
                 type="submit"
                 value="Submit"
