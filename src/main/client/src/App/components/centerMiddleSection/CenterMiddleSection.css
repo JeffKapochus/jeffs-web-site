@@ -1,0 +1,84 @@
+.tableHolder{
+  display:table;
+  width:100%;
+  min-height:100px;
+  padding: 2.25em 0;
+}
+.contentHolder{
+  vertical-align: middle;
+  width:100%;
+}
+.contentHolder h1{
+  font-size:2.5vw;
+}
+.contentHolder h2{
+  font-size:1.7vw;
+}
+.contentHolder h3{
+  margin: 0.7em 0;
+  text-align:center;
+  font-size:1.8vw;
+}
+.contentHolder h4{
+  font-size:1.4vw;
+  margin:1.5em 0 0.5em 0;
+}
+.contentHolder h5{
+  font-size: 1vw;
+  font-style: italic;
+  font-weight: bold;
+  margin:0;
+}
+.contentHolder p {
+  font-size:1vw;
+  margin:1.1em 0;
+}
+.contentHolder li {
+  font-size:1vw;
+}
+@media only screen and (max-width: 1300px) {
+  .contentHolder h1{
+    font-size:32px;
+  }
+  .contentHolder h2{
+    font-size:24px;
+  }
+  .contentHolder h3{
+    font-size:28px;
+  }
+  .contentHolder h4{
+    font-size:24px;
+  }
+  .contentHolder h5{
+    font-size:20px;
+  }
+  .contentHolder p {
+    font-size:18px;
+  }
+  .contentHolder li {
+    font-size:17px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .contentHolder h1{
+    font-size:48px;
+  }
+  .contentHolder h2{
+    font-size:32px;
+  }
+  .contentHolder h3{
+    font-size:35px;
+  }
+  .contentHolder h4{
+    font-size:27px;
+  }
+  .contentHolder h5{
+    font-size:20px;
+  }
+  .contentHolder p {
+    font-size:20px;
+  }
+  .contentHolder li {
+    font-size:19px;
+  }
+}

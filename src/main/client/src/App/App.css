@@ -1,0 +1,99 @@
+#header{
+  top:0;
+  position:fixed;
+  height: 50px;
+  background-color:white;
+  text-align:center;
+  width:100%;
+}
+#header a{
+  color:black;
+  text-decoration: none;
+  padding-top:0.5em;
+  -webkit-transition: 0.2s; /* Safari prior 6.1 */
+  transition: 0.2s;
+}
+#header a:hover{
+  color:#003b6f;
+  border-top:5px solid #003b6f;
+  -webkit-transition: 0.2s; /* Safari prior 6.1 */
+  transition: 0.2s;
+}
+#header ul{
+  list-style-type:none;
+  padding-left:0;
+  display:inline-block;
+}
+#header ul li{
+  display:inline-block;
+}
+#headSocMedLinks{
+  position:absolute;
+  right:0;
+  float:right;
+  margin-right: 20%;
+}
+#headSocMedLinks li{
+  padding-right: 0.7em;
+}
+#routerContent{
+  margin-top:50px;
+}
+#footer{
+  background-color:#003b6f;
+  color:white;
+  text-align:center;
+  padding: 2em 0;
+  font-size:20px;
+}
+#footSocMedLinks{
+  list-style-type:none;
+  padding:0;
+}
+#footSocMedLinks li{
+  padding:0.66em;
+  display:inline-block;
+}
+#footer a{
+  color:white;
+}
+#footerImg{
+  border-radius:999px;
+  max-width:150px;
+}
+.grid-1 {width: 7.33%;}
+.grid-2 {width: 15.66%;}
+.grid-3 {width: 24%;}
+.grid-4 {width: 32.33%;}
+.grid-5 {width: 40.66%;}
+.grid-6 {width: 49%;}
+.grid-7 {width: 57.33%;}
+.grid-8 {width: 65.66%;}
+.grid-9 {width: 74%;}
+.grid-10 {width: 82.33%;}
+.grid-11 {width: 90.66%;}
+.grid-12 {width: 99%;}
+[class*="grid-"] {
+  float: left;
+  padding:0.5%;
+}
+.grid{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+.grid::after {
+  content: "";
+  clear: both;
+  display:table;
+}
+@media only screen and (max-width: 768px) {
+  [class*="grid-"] {
+    width: 90vw;
+    padding: 0 5vw;
+  }
+  #headSocMedLinks{
+    float:right;
+    margin-right: 10px;
+  }
+}
