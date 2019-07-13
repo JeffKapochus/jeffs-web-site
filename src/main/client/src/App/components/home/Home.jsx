@@ -136,6 +136,26 @@ export class Home extends React.Component {
           </div>
           <div className="grid-2"></div>
         </CenterMiddleSection>
+        <CenterMiddleSection
+          backgroundImage={process.env.PUBLIC_URL + "/images/bg2.png"}
+          textColor="white"
+        >
+            <h3>Programming Projects</h3>
+        </CenterMiddleSection>
+        <CenterMiddleSection
+          backgroundImage={process.env.PUBLIC_URL + "/images/bg3.png"}
+          textColor="white"
+          align="center"
+        >
+            <h3>Writing Projects</h3>
+            <h4>Coming Soon</h4>
+        </CenterMiddleSection>
+        <CenterMiddleSection
+          backgroundImage={process.env.PUBLIC_URL + "/images/bg4.png"}
+          textColor="black"
+        >
+            <h3>Contact Me</h3>
+        </CenterMiddleSection>
       </div>
     );
   }
