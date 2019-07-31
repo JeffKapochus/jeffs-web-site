@@ -45,8 +45,7 @@ const Routes = () => (
         </div>
       </div>
       <div id="copyrightDiv">
-      © Jeff Kapochus 2016 - {new Date().getFullYear()}<br/>(484) 473-4360‬
-        {new Date().getFullYear()}
+      © Jeff Kapochus 2016 - {new Date().getFullYear()}
       </div>
     </div>
   </BrowserRouter>

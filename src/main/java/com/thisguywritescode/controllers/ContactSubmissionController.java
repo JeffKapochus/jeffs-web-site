@@ -2,6 +2,7 @@ package com.thisguywritescode.controllers;
 
 import static com.thisguywritescode.utilities.Functions.verifyContactSubmission;
 import static com.thisguywritescode.utilities.Functions.verifyId;
+import static com.thisguywritescode.utilities.MailUtility.SendContactSubmissionEmail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public class ContactSubmissionController {
 	@Autowired
 	ContactSubmissionServiceImpl contactSubmissionService;;
 
-	@GetMapping(value = "/contactSubmission")
+	// @GetMapping(value = "/contactSubmission")
 	// @CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<List<ContactSubmission>> getAllContactSubmissions() {
 		List<ContactSubmission> subs = new ArrayList<ContactSubmission>();
@@ -41,7 +42,7 @@ public class ContactSubmissionController {
 		return new ResponseEntity<List<ContactSubmission>>(subs, status);
 	}
 
-	@GetMapping(value = "/contactSubmission/{id}")
+	// @GetMapping(value = "/contactSubmission/{id}")
 	// @CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<ContactSubmission> getContactSubmissionById(@PathVariable("id") final int id) {
 		ContactSubmission sub = null;
@@ -59,6 +60,7 @@ public class ContactSubmissionController {
 	}
 
 	@PostMapping("/contactSubmission")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<ContactSubmission> newContactSubmission(@RequestBody ContactSubmission sub) {
 		HttpStatus status = HttpStatus.OK;
 		try {
@@ -66,6 +68,8 @@ public class ContactSubmissionController {
 				throw new IllegalArgumentException();
 			}
 			sub = contactSubmissionService.saveContactSubmission(sub);
+			SendContactSubmissionEmail(sub);
+
 		} catch (final Exception e) {
 			System.out.println(e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -1,5 +1,6 @@
 import React from "react";
 import './Portfolio.css';
+import { PortfolioPiece } from '../portfolioPiece/PortfolioPiece'
 
 export class Portfolio extends React.Component {
   getGridNumber(){
@@ -15,7 +16,7 @@ export class Portfolio extends React.Component {
     return (
       <div className="portfolio">
         {React.Children.map(this.props.children, (child,i) => {
-          if(child.type.name === "PortfolioPiece"){
+          if(child.type === PortfolioPiece){
             return (<div className={"grid-" + this.getGridNumber()}>{child}</div>);
           }
         })}

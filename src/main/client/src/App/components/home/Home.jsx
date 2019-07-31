@@ -20,9 +20,9 @@ export class Home extends React.Component {
             src={process.env.PUBLIC_URL + "/images/me_small.jpg"}
             alt="Jeff Kapochus headshot"
           />
-          <h1>Digital Portfolio of Jeff Kapochus</h1>
+          <h1>Welcome to Jeff's Web.Site</h1>
+          <h2>Digital Portfolio of Jeff Kapochus</h2>
           <h2>Web Developer – Application Developer – Creative Writer</h2>
-          <h2>This Guy Writes Code</h2>
         </CenterMiddleSection>
         <CenterMiddleSection
           backgroundImage={process.env.PUBLIC_URL + "/images/bg4.png"}
@@ -65,21 +65,38 @@ export class Home extends React.Component {
               </p>
               <h4>Experience Highlights</h4>
               <p>
+                <strong>GliderTech Ltd</strong>, Clitheroe, UK (Remote 100%)
+              </p>
+              <p>
+                <strong>Software Engineer</strong>, 10/2019 – Present
+              </p>
+              <p>
+                Technologies: React, TypeScript, Redux, C#, .NET, MySQL, Docker, Scrum, Agile
+              </p>
+              <p>
+                Developed, documented, tested, and debugged software modules. Participated in code reviews to ensure code quality, and assisted in creation of design specifications from which software was created. 
+              </p>
+              <ul>
+                <li>
+                  Developed entirety of administrative features, including front-end UIs with React and Redux, Back-End logic with C# .Net and XUnit, and database structure with MySQL.
+                </li>
+              </ul>
+              <p>
                 <strong>Cerner Corporation</strong>, Malvern, PA
               </p>
               <p>
-                <strong>Academy Software Engineer</strong>, March 2019 - Present
+                <strong>Academy Software Engineer</strong>, March 2019 - September 2019
               </p>
               <p>
                 Technologies: Java, Spring Boot, React, MySQL, Hibernate,
                 Docker, Scrum, Agile
               </p>
               <p>
-                Responsible for writing code, testing and debugging new
-                software, and enhancing existing software from client
+                Responsible for writing code, testing and debugging
+                new software, and enhancing existing software from client
                 requirements. Participated in code reviews to identify basic
                 issues and deviations from best practices. Note: The Academy was
-                a two month bootcamp-like program in which junior developers
+                a several month bootcamp-like program in which junior developers
                 were put onto temporary scrum teams working on internal projects
                 to learn the ins and outs of real development environments.
               </p>
@@ -94,7 +111,7 @@ export class Home extends React.Component {
                 </li>
               </ul>
               <p>
-                <strong>Lockheed Martin Space</strong>, King of Prussia, PA
+                <strong>Lockheed Martin Space</strong>, King of Prussia, PA (Remote 10%)
               </p>
               <p>
                 <strong>Software Engineer</strong>, June 2018 - March 2019
@@ -120,7 +137,7 @@ export class Home extends React.Component {
                 </li>
               </ul>
               <p>
-                <strong>West Chester University</strong>, West Chester, PA
+                <strong>West Chester University</strong>, West Chester, PA (Remote 20%)
               </p>
               <p>
                 <strong>Web Team Intern</strong>, September 2015 - June 2018
@@ -162,7 +179,7 @@ export class Home extends React.Component {
             <PortfolioPiece
               image={process.env.PUBLIC_URL + "/images/not300x217.png"}
               title="Game Dev Project (2018 - Unity)"
-              url="/GameDevPreAlpha"
+              url="/ProjectDelorean"
             />
           </Portfolio>
         </CenterMiddleSection>
@@ -179,7 +196,7 @@ export class Home extends React.Component {
           textColor="black"
         >
           <h3>Contact Me</h3>
-          <ContactForm />
+          There will be a ContactForm here soon! For now, you can <a href="mailto:jeff.kapochus@gmail.com">send me an email</a>!
         </CenterMiddleSection>
       </div>
     );
