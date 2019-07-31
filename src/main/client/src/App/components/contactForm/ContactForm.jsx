@@ -2,7 +2,8 @@ import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./ContactForm.css";
 
-const SITE_KEY = "6Lcu3jUUAAAAAKgA6-myODOcndPRyeCo3MS1kR_X";
+const SITE_KEY = "CENSORED";
+const URL = "CENSORED";
 
 export class ContactForm extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export class ContactForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
     this.checkClientSideValid = this.checkClientSideValid.bind(this);
+    this.postContactSubmission = this.postContactSubmission.bind(this);
   }
   handleInputChange(event) {
     const target = event.target;
@@ -37,9 +39,12 @@ export class ContactForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.checkClientSideValid) {
-      console.log("Hello, " + this.state.name + ", your email has been sent.");
+      this.postContactSubmission();
+      document.getElementById("contactSubmissionConfirmation").classList.remove("hidden");
+      document.getElementById("frmContact").classList.add("hidden");
     } else {
-      console.log("NO WAY");
+      document.getElementById("contactSubmissionError").classList.remove("hidden");
+      document.getElementById("frmContact").classList.add("hidden");
     }
   }
   checkClientSideValid() {
@@ -54,83 +59,115 @@ export class ContactForm extends React.Component {
     }
     return true;
   }
+  async postContactSubmission(){
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        subject: this.state.subject,
+        content: this.state.message,
+        created_at: Date.now(),
+        updated_at: Date.now(),
+        isActive: true
+      })
+    });
+    if(response.status === 200){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   render() {
     return (
-      <div className="contactForm">
+      <div className="contactSection">
         <div className="grid">
-          <form onSubmit={this.handleSubmit}>
-            <div className="grid-12">
+          <div className="contactForm">
+            <form id="frmContact" onSubmit={this.handleSubmit}>
               <div className="grid-12">
-                <label htmlFor="txtName">Your Name (Required):</label>
+                <div className="grid-12">
+                  <label htmlFor="txtName">Your Name (Required):</label>
+                </div>
+                <div className="grid-12">
+                  <input
+                    id="txtName"
+                    name="name"
+                    value={this.state.name}
+                    type="text"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
               </div>
               <div className="grid-12">
-                <input
-                  id="txtName"
-                  name="name"
-                  value={this.state.name}
-                  type="text"
-                  onChange={this.handleInputChange}
-                />
+                <div className="grid-12">
+                  <label htmlFor="txtEmail">Your Email Address (Required):</label>
+                </div>
+                <div className="grid-12">
+                  <input
+                    id="txtEmail"
+                    name="email"
+                    value={this.state.email}
+                    type="email"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
               </div>
+              <div className="grid-12">
+                <div className="grid-12">
+                  <label htmlFor="txtSubject">Message Subject (Required):</label>
+                </div>
+                <div className="grid-12">
+                  <input
+                    id="txtSubject"
+                    name="subject"
+                    value={this.state.subject}
+                    type="text"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="grid-12">
+                <div className="grid-12">
+                  <label htmlFor="txtContent">Message Content (Required):</label>
+                </div>
+                <div className="grid-12">
+                  <textarea
+                    id="txtContent"
+                    name="message"
+                    value={this.state.message}
+                    type="text"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="grid-12">
+                <div className="grid-12">
+                  <ReCAPTCHA
+                    sitekey={SITE_KEY}
+                    onChange={this.handleCaptchaChange}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  value="Submit"
+                  disabled={!this.checkClientSideValid()}
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            <div id="contactSubmissionConfirmation" className="hidden">
+              <label>Your email has successfully been sent!</label>
             </div>
-            <div className="grid-12">
-              <div className="grid-12">
-                <label htmlFor="txtEmail">Your Email Address (Required):</label>
-              </div>
-              <div className="grid-12">
-                <input
-                  id="txtEmail"
-                  name="email"
-                  value={this.state.email}
-                  type="text"
-                  onChange={this.handleInputChange}
-                />
-              </div>
+            <div id="contactSubmissionError" className="hidden">
+              <label>Something has gone wrong and your email was not properly sent. Please try again later.</label>
             </div>
-            <div className="grid-12">
-              <div className="grid-12">
-                <label htmlFor="txtSubject">Message Subject (Required):</label>
-              </div>
-              <div className="grid-12">
-                <input
-                  id="txtSubject"
-                  name="subject"
-                  value={this.state.subject}
-                  type="text"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="grid-12">
-              <div className="grid-12">
-                <label htmlFor="txtContent">Message Content (Required):</label>
-              </div>
-              <div className="grid-12">
-                <textarea
-                  id="txtContent"
-                  name="message"
-                  value={this.state.message}
-                  type="text"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="grid-12">
-              <div className="grid-12">
-                <ReCAPTCHA
-                  sitekey={SITE_KEY}
-                  onChange={this.handleCaptchaChange}
-                />
-              </div>
-              <button
-                type="submit"
-                value="Submit"
-                disabled={!this.checkClientSideValid()}
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     );
