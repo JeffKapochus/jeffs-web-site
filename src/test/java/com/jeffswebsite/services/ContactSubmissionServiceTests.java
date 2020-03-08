@@ -24,10 +24,10 @@ import com.jeffswebsite.models.ContactSubmission;
 import com.jeffswebsite.repositories.ContactSubmissionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ContactSubmissionServiceImplTest {
+public class ContactSubmissionServiceTests {
 
 	@InjectMocks
-	ContactSubmissionService contactSubmissionService = new ContactSubmissionServiceImpl();
+	IContactSubmissionService contactSubmissionService = new ContactSubmissionService();
 
 	@Mock
 	ContactSubmissionRepository mockContactSubmissionRepository;

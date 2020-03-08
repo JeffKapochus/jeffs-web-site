@@ -1,21 +1,57 @@
 package com.jeffswebsite.services;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.repositories.ContactSubmissionRepository;
 
-public interface ContactSubmissionService {
+@Component
+@Service
+public class ContactSubmissionService implements IContactSubmissionService {
 
-	public ContactSubmission getContactSubmissionById(int id);
+	@Autowired
+	ContactSubmissionRepository contactSubmissionRepository;
 
-	public List<ContactSubmission> getAllContactSubmissions();
+	@Override
+	public ContactSubmission getContactSubmissionById(final int id) {
+		ContactSubmission sub = null;
+		final Optional<ContactSubmission> tempSub = contactSubmissionRepository.findById(id);
+		if (tempSub.isPresent()) {
+			sub = tempSub.get();
+		}
+		return sub;
+	}
 
-	public List<ContactSubmission> getContactSubmissionsByName(String name);
+	@Override
+	public List<ContactSubmission> getAllContactSubmissions() {
+		return contactSubmissionRepository.findAll();
+	}
 
-	public List<ContactSubmission> getContactSubmissionsByEmail(String email);
+	@Override
+	public List<ContactSubmission> getContactSubmissionsByName(final String name) {
+		return contactSubmissionRepository.findByName(name);
+	}
 
-	public ContactSubmission saveContactSubmission(ContactSubmission sub);
+	@Override
+	public List<ContactSubmission> getContactSubmissionsByEmail(final String email) {
+		return contactSubmissionRepository.findByEmail(email);
+	}
 
-	void removeContactSubmission(int id);
+	@Override
+	public ContactSubmission saveContactSubmission(final ContactSubmission sub) {
+		return contactSubmissionRepository.save(sub);
+	}
+
+	@Override
+	public void removeContactSubmission(final int id) {
+		final ContactSubmission sub = getContactSubmissionById(id);
+		sub.setIsActive(false);
+		contactSubmissionRepository.save(sub);
+	}
 
 }

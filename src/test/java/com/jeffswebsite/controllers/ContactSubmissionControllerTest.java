@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.jeffswebsite.models.ContactSubmission;
-import com.jeffswebsite.services.ContactSubmissionServiceImpl;
+import com.jeffswebsite.services.ContactSubmissionService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContactSubmissionControllerTest {
@@ -28,7 +28,7 @@ public class ContactSubmissionControllerTest {
 	ContactSubmissionController contactSubmissionController;
 
 	@Mock
-	ContactSubmissionServiceImpl mockContactSubmissionService;
+	ContactSubmissionService mockContactSubmissionService;
 
 	private ContactSubmission VALID_SUBMISSION;
 	private final int VALID_ID = 1;

@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jeffswebsite.models.ContactSubmission;
-import com.jeffswebsite.services.ContactSubmissionServiceImpl;
+import com.jeffswebsite.services.ContactSubmissionService;
 
 @Component
 @Controller("contactController")
 public class ContactSubmissionController {
 
 	@Autowired
-	ContactSubmissionServiceImpl contactSubmissionService;;
+	ContactSubmissionService contactSubmissionService;;
 
 	// @GetMapping(value = "/contactSubmission")
 	// @CrossOrigin(origins = "http://localhost:3000")
