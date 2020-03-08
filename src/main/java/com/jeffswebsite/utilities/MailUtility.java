@@ -10,13 +10,13 @@ import com.jeffswebsite.models.ContactSubmission;
 
 public class MailUtility {
 
-	private static final String HOST = "****";
-	private static final int PORT = 000;
+	private static final String HOST = System.getenv().get("jeffswebsite.mail.host");
+	private static final int PORT = Integer.parseInt(System.getenv().get("jeffswebsite.mail.port"));
 	private static final boolean SSL_FLAG = true;
-	private static final String USERNAME = "webmaster@thisguywritescode.com";
-	private static final String PASSWORD = "****";
-	private static final String TO_ADDRESS = "Jeff.Kapochus@gmail.com";
-	private static final String CC_ADDRESS = "Jeff@thisguywritescode.com";
+	private static final String USERNAME = System.getenv().get("jeffswebsite.mail.username");
+	private static final String PASSWORD = System.getenv().get("jeffswebsite.mail.password");
+	private static final String TO_ADDRESS = System.getenv().get("jeffswebsite.mail.toAddress");
+	private static final String CC_ADDRESS = System.getenv().get("jeffswebsite.mail.ccAddress");
 
 	public static boolean SendContactSubmissionEmail(final ContactSubmission contactSubmission) {
 		try {

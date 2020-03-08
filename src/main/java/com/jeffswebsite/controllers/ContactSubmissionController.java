@@ -69,7 +69,6 @@ public class ContactSubmissionController {
 			}
 			sub = contactSubmissionService.saveContactSubmission(sub);
 			SendContactSubmissionEmail(sub);
-
 		} catch (final Exception e) {
 			System.out.println(e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
