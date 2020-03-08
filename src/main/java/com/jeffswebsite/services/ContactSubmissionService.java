@@ -1,8 +1,8 @@
-package com.thisguywritescode.services;
+package com.jeffswebsite.services;
 
 import java.util.List;
 
-import com.thisguywritescode.models.ContactSubmission;
+import com.jeffswebsite.models.ContactSubmission;
 
 public interface ContactSubmissionService {
 

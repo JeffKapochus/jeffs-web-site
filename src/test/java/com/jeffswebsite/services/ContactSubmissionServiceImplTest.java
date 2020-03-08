@@ -1,4 +1,4 @@
-package com.thisguywritescode.services;
+package com.jeffswebsite.services;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -20,8 +20,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.thisguywritescode.models.ContactSubmission;
-import com.thisguywritescode.repositories.ContactSubmissionRepository;
+import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.repositories.ContactSubmissionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContactSubmissionServiceImplTest {

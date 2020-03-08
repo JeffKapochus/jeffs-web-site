@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'this-guy-writes-code'
+rootProject.name = 'jeffs-web-site'

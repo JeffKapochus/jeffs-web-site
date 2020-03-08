@@ -1,6 +1,6 @@
-package com.thisguywritescode.utilities;
+package com.jeffswebsite.utilities;
 
-import com.thisguywritescode.models.ContactSubmission;
+import com.jeffswebsite.models.ContactSubmission;
 
 public class Functions {
 

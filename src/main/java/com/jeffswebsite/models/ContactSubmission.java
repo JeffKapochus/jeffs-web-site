@@ -1,4 +1,4 @@
-package com.thisguywritescode.models;
+package com.jeffswebsite.models;
 
 import java.util.Date;
 

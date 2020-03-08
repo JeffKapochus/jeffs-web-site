@@ -1,8 +1,8 @@
-package com.thisguywritescode.controllers;
+package com.jeffswebsite.controllers;
 
-import static com.thisguywritescode.utilities.Functions.verifyContactSubmission;
-import static com.thisguywritescode.utilities.Functions.verifyId;
-import static com.thisguywritescode.utilities.MailUtility.SendContactSubmissionEmail;
+import static com.jeffswebsite.utilities.Functions.verifyContactSubmission;
+import static com.jeffswebsite.utilities.Functions.verifyId;
+import static com.jeffswebsite.utilities.MailUtility.SendContactSubmissionEmail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.thisguywritescode.models.ContactSubmission;
-import com.thisguywritescode.services.ContactSubmissionServiceImpl;
+import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.services.ContactSubmissionServiceImpl;
 
 @Component
 @Controller("contactController")

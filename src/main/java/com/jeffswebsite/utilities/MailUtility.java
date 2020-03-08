@@ -1,12 +1,12 @@
-package com.thisguywritescode.utilities;
+package com.jeffswebsite.utilities;
 
-import static com.thisguywritescode.utilities.Functions.verifyContactSubmission;
+import static com.jeffswebsite.utilities.Functions.verifyContactSubmission;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 
-import com.thisguywritescode.models.ContactSubmission;
+import com.jeffswebsite.models.ContactSubmission;
 
 public class MailUtility {
 

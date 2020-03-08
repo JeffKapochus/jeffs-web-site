@@ -1,4 +1,4 @@
-package com.thisguywritescode.utilities;
+package com.jeffswebsite.utilities;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.thisguywritescode.models.ContactSubmission;
+import com.jeffswebsite.models.ContactSubmission;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailUtilityTest {

@@ -1,4 +1,4 @@
-package com.thisguywritescode.models;
+package com.jeffswebsite.models;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

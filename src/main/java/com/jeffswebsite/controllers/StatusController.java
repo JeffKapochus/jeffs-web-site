@@ -1,6 +1,6 @@
-package com.thisguywritescode.controllers;
+package com.jeffswebsite.controllers;
 
-import static com.thisguywritescode.utilities.Constants.SERVICE_SUCCESS;
+import static com.jeffswebsite.utilities.Constants.SERVICE_SUCCESS;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

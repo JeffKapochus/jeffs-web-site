@@ -1,4 +1,4 @@
-package com.thisguywritescode.controllers;
+package com.jeffswebsite.controllers;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,8 +18,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.thisguywritescode.models.ContactSubmission;
-import com.thisguywritescode.services.ContactSubmissionServiceImpl;
+import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.services.ContactSubmissionServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContactSubmissionControllerTest {

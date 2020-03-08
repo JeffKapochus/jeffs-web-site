@@ -1,6 +1,6 @@
-package com.thisguywritescode.controllers;
+package com.jeffswebsite.controllers;
 
-import static com.thisguywritescode.utilities.Constants.SERVICE_SUCCESS;
+import static com.jeffswebsite.utilities.Constants.SERVICE_SUCCESS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

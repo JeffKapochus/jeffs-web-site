@@ -1,4 +1,4 @@
-package com.thisguywritescode.services;
+package com.jeffswebsite.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.thisguywritescode.models.ContactSubmission;
-import com.thisguywritescode.repositories.ContactSubmissionRepository;
+import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.repositories.ContactSubmissionRepository;
 
 @Component
 @Service

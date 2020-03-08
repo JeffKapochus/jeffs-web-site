@@ -1,4 +1,4 @@
-package com.thisguywritescode;
+package com.jeffswebsite;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
