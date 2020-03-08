@@ -71,9 +71,10 @@ public class ContactSubmissionController {
 		HttpStatus status = HttpStatus.OK;
 		final NewContactSubmissionResponse response = new NewContactSubmissionResponse();
 		try {
-			if (!verifyContactSubmission(sub)) {
+			final String validationErrors = verifyContactSubmission(sub);
+			if (!(validationErrors.equals(""))) {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
-				response.setValidationMessage("Contact Submission was improperly formed.");
+				response.setValidationMessage(validationErrors);
 
 			}
 			else {

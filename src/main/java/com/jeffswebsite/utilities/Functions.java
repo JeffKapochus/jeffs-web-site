@@ -11,13 +11,23 @@ public class Functions {
 		return true;
 	}
 
-	public static boolean verifyContactSubmission(final ContactSubmission sub) {
-		if (sub == null || sub.getName() == "" || sub.getName() == " " || sub.getName() == null || sub.getEmail() == ""
-				|| sub.getEmail() == " " || sub.getEmail() == null || sub.getSubject() == "" || sub.getSubject() == " "
-				|| sub.getSubject() == null || sub.getContent() == "" || sub.getContent() == " "
-				|| sub.getContent() == null) {
-			return false;
+	public static String verifyContactSubmission(final ContactSubmission sub) {
+		final StringBuilder errorList = new StringBuilder();
+		if (sub == null) {
+			errorList.append("Contact Submission is null.");
 		}
-		return true;
+		if (sub.getName() == "" || sub.getName() == " " || sub.getName() == null) {
+			errorList.append("Contact Submission name is malformed.");
+		}
+		if (sub.getEmail() == "" || sub.getEmail() == " " || sub.getEmail() == null) {
+			errorList.append("Contact Submission email is malformed.");
+		}
+		if (sub.getSubject() == "" || sub.getSubject() == " " || sub.getSubject() == null) {
+			errorList.append("Contact Submission subject is malformed.");
+		}
+		if (sub.getContent() == "" || sub.getContent() == " " || sub.getContent() == null) {
+			errorList.append("Contact Submission content is malformed.");
+		}
+		return errorList.toString();
 	}
 }

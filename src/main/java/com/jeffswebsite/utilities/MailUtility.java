@@ -34,7 +34,6 @@ public class MailUtility {
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.debug", "true");
 
 		final SendMailResponse response = new SendMailResponse();
 		try {
