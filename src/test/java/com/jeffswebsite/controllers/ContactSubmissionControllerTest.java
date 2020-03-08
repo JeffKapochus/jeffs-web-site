@@ -1,6 +1,7 @@
 package com.jeffswebsite.controllers;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -19,7 +20,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.models.responses.mail.NewContactSubmissionResponse;
+import com.jeffswebsite.models.responses.mail.SendMailResponse;
 import com.jeffswebsite.services.ContactSubmissionService;
+import com.jeffswebsite.utilities.MailUtility;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContactSubmissionControllerTest {
@@ -30,9 +34,14 @@ public class ContactSubmissionControllerTest {
 	@Mock
 	ContactSubmissionService mockContactSubmissionService;
 
+	@Mock
+	MailUtility mockMailUtility;
+
 	private ContactSubmission VALID_SUBMISSION;
 	private final int VALID_ID = 1;
 	private List<ContactSubmission> EMPTY_LIST;
+	private NewContactSubmissionResponse VALID_RESPONSE;
+	private SendMailResponse VALID_MAIL_RESPONSE;
 
 	@Before
 	public void setUp() {
@@ -47,7 +56,19 @@ public class ContactSubmissionControllerTest {
 		VALID_SUBMISSION.setUpdated_at(new Date());
 		VALID_SUBMISSION.setIsActive(true);
 
+		VALID_MAIL_RESPONSE = new SendMailResponse();
+		VALID_MAIL_RESPONSE.setSuccess(true);
+		VALID_MAIL_RESPONSE.setEmailId("testMailId");
+		VALID_MAIL_RESPONSE.setValidationMessage(null);
+
+		VALID_RESPONSE = new NewContactSubmissionResponse();
+		VALID_RESPONSE.setSubmission(VALID_SUBMISSION);
+		VALID_RESPONSE.setMailResponse(VALID_MAIL_RESPONSE);
+		VALID_RESPONSE.setHttpStatus(HttpStatus.OK);
+
 		doReturn(VALID_SUBMISSION).when(mockContactSubmissionService).saveContactSubmission(VALID_SUBMISSION);
+
+		doReturn(VALID_MAIL_RESPONSE).when(mockMailUtility).sendContactSubmissionEmail(VALID_SUBMISSION);
 	}
 
 	@Test
@@ -105,33 +126,35 @@ public class ContactSubmissionControllerTest {
 
 	@Test
 	public void newContactSubmission_returnsInternalServerError_whenGivenInvalidSubmission() {
-		final ResponseEntity<ContactSubmission> expected = new ResponseEntity<ContactSubmission>(
-				(ContactSubmission) null, HttpStatus.INTERNAL_SERVER_ERROR);
-		final ResponseEntity<ContactSubmission> result = contactSubmissionController.newContactSubmission(null);
+		final ResponseEntity<NewContactSubmissionResponse> result = contactSubmissionController
+				.newContactSubmission(null);
 
-		assertThat(result, is(expected));
+		assertThat(result.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
+		assertThat(result.getBody().getValidationMessage(), is("Contact Submission was improperly formed."));
+		assertThat(result.getBody().getHttpStatus(), is(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	@Test
 	public void newContactSubmission_returnsInternalServerError_whenGivenIncompleteSubmission() {
 		VALID_SUBMISSION.setName(null);
 
-		final ResponseEntity<ContactSubmission> expected = new ResponseEntity<ContactSubmission>(VALID_SUBMISSION,
-				HttpStatus.INTERNAL_SERVER_ERROR);
-		final ResponseEntity<ContactSubmission> result = contactSubmissionController
+		final ResponseEntity<NewContactSubmissionResponse> result = contactSubmissionController
 				.newContactSubmission(VALID_SUBMISSION);
 
-		assertThat(result, is(expected));
+		assertThat(result.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
+		assertThat(result.getBody().getValidationMessage(), is("Contact Submission was improperly formed."));
+		assertThat(result.getBody().getHttpStatus(), is(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	@Test
 	public void newContactSubmission_savesSubmission_whenGivenValidSubmission() {
-		final ResponseEntity<ContactSubmission> expected = new ResponseEntity<ContactSubmission>(VALID_SUBMISSION,
-				HttpStatus.OK);
-		final ResponseEntity<ContactSubmission> result = contactSubmissionController
+		final ResponseEntity<NewContactSubmissionResponse> result = contactSubmissionController
 				.newContactSubmission(VALID_SUBMISSION);
 
-		assertThat(result, is(expected));
+		assertThat(result.getStatusCode(), is(HttpStatus.OK));
+		assertThat(result.getBody().getHttpStatus(), is(HttpStatus.OK));
+		assertNull(result.getBody().getValidationMessage());
+		assertThat(result.getBody().getMailResponse(), is(VALID_MAIL_RESPONSE));
 	}
 
 	@Test

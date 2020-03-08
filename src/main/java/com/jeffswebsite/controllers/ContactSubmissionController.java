@@ -2,7 +2,6 @@ package com.jeffswebsite.controllers;
 
 import static com.jeffswebsite.utilities.Functions.verifyContactSubmission;
 import static com.jeffswebsite.utilities.Functions.verifyId;
-import static com.jeffswebsite.utilities.MailUtility.SendContactSubmissionEmail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +18,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.models.responses.mail.NewContactSubmissionResponse;
+import com.jeffswebsite.models.responses.mail.SendMailResponse;
 import com.jeffswebsite.services.ContactSubmissionService;
+import com.jeffswebsite.utilities.MailUtility;
 
 @Component
 @Controller("contactController")
 public class ContactSubmissionController {
 
 	@Autowired
-	ContactSubmissionService contactSubmissionService;;
+	ContactSubmissionService contactSubmissionService;
+	@Autowired
+	MailUtility mailUtility;
 
 	// @GetMapping(value = "/contactSubmission")
 	// @CrossOrigin(origins = "http://localhost:3000")
@@ -35,7 +39,8 @@ public class ContactSubmissionController {
 		HttpStatus status = HttpStatus.OK;
 		try {
 			subs = contactSubmissionService.getAllContactSubmissions();
-		} catch (final Exception e) {
+		}
+		catch (final Exception e) {
 			System.out.println(e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
@@ -52,7 +57,8 @@ public class ContactSubmissionController {
 				throw new IllegalArgumentException();
 			}
 			sub = contactSubmissionService.getContactSubmissionById(id);
-		} catch (final Exception e) {
+		}
+		catch (final Exception e) {
 			System.out.println(e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
@@ -61,19 +67,35 @@ public class ContactSubmissionController {
 
 	@PostMapping("/contactSubmission")
 	@CrossOrigin(origins = "http://localhost:3000")
-	public ResponseEntity<ContactSubmission> newContactSubmission(@RequestBody ContactSubmission sub) {
+	public ResponseEntity<NewContactSubmissionResponse> newContactSubmission(@RequestBody ContactSubmission sub) {
 		HttpStatus status = HttpStatus.OK;
+		final NewContactSubmissionResponse response = new NewContactSubmissionResponse();
 		try {
 			if (!verifyContactSubmission(sub)) {
-				throw new IllegalArgumentException();
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+				response.setValidationMessage("Contact Submission was improperly formed.");
+
 			}
-			sub = contactSubmissionService.saveContactSubmission(sub);
-			SendContactSubmissionEmail(sub);
-		} catch (final Exception e) {
-			System.out.println(e);
+			else {
+				final SendMailResponse mailResponse = mailUtility.sendContactSubmissionEmail(sub);
+				response.setMailResponse(mailResponse);
+				if (mailResponse.isSuccess()) {
+					sub = contactSubmissionService.saveContactSubmission(sub);
+					response.setSubmission(sub);
+					status = HttpStatus.OK;
+				}
+				else {
+					status = HttpStatus.INTERNAL_SERVER_ERROR;
+					response.setValidationMessage(mailResponse.getValidationMessage());
+				}
+			}
+		}
+		catch (final Exception e) {
+			response.setValidationMessage(e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		return new ResponseEntity<ContactSubmission>(sub, status);
+		response.setHttpStatus(status);
+		return new ResponseEntity<NewContactSubmissionResponse>(response, status);
 	}
 
 	@DeleteMapping("/contactSubmission/{id}")
@@ -85,7 +107,8 @@ public class ContactSubmissionController {
 				throw new IllegalArgumentException();
 			}
 			contactSubmissionService.removeContactSubmission(id);
-		} catch (final Exception e) {
+		}
+		catch (final Exception e) {
 			System.out.println(e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 			deleted = false;

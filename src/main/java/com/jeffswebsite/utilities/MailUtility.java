@@ -1,47 +1,60 @@
 package com.jeffswebsite.utilities;
 
-import static com.jeffswebsite.utilities.Functions.verifyContactSubmission;
+import java.util.Properties;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.SimpleEmail;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.stereotype.Component;
 
 import com.jeffswebsite.models.ContactSubmission;
+import com.jeffswebsite.models.responses.mail.SendMailResponse;
 
+@Component
 public class MailUtility {
 
-	private static final String HOST = System.getenv().get("jeffswebsite.mail.host");
-	private static final int PORT = Integer.parseInt(System.getenv().get("jeffswebsite.mail.port"));
-	private static final boolean SSL_ENABLED = true;
-	private static final boolean STARTTLS_ENABLED = true;
-	private static final String USERNAME = System.getenv().get("jeffswebsite.mail.username");
-	private static final String PASSWORD = System.getenv().get("jeffswebsite.mail.password");
-	private static final String TO_ADDRESS = System.getenv().get("jeffswebsite.mail.toAddress");
-	private static final String CC_ADDRESS = System.getenv().get("jeffswebsite.mail.ccAddress");
+	@Value("${jeffswebsite.mail.host}")
+	private String host;
+	@Value("${jeffswebsite.mail.port}")
+	private String port;
+	@Value("${jeffswebsite.mail.username}")
+	private String username;
+	@Value("${jeffswebsite.mail.password}")
+	private String password;
+	@Value("${jeffswebsite.mail.toAddress}")
+	private String toAddress;
 
-	public static boolean SendContactSubmissionEmail(final ContactSubmission contactSubmission) {
+	public SendMailResponse sendContactSubmissionEmail(final ContactSubmission contactSubmission) {
+		final JavaMailSenderImpl sender = new JavaMailSenderImpl();
+		sender.setHost(this.host);
+		sender.setPort(Integer.parseInt(this.port));
+		sender.setUsername(this.username);
+		sender.setPassword(this.password);
+		final Properties props = sender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		final SendMailResponse response = new SendMailResponse();
 		try {
-			if (!verifyContactSubmission(contactSubmission)) {
-				throw new IllegalArgumentException();
-			}
-			final Email email = new SimpleEmail();
-			email.setHostName(HOST);
-			email.setSmtpPort(PORT);
-			email.setAuthenticator(new DefaultAuthenticator(USERNAME, PASSWORD));
-			email.setAuthentication(USERNAME, PASSWORD);
-			email.setSSLOnConnect(SSL_ENABLED);
-			email.setStartTLSEnabled(STARTTLS_ENABLED);
-			email.setFrom(contactSubmission.getEmail(), contactSubmission.getName());
-			email.setSubject(contactSubmission.getSubject());
-			email.setMsg(contactSubmission.getContent());
-			email.addTo(TO_ADDRESS);
-			email.addCc(CC_ADDRESS);
-			email.send();
-		} catch (final Exception e) {
-			System.err.println(e);
-			return false;
+			final SimpleMailMessage msg = new SimpleMailMessage();
+			// For my purposes, from == to because gmail doesn't let
+			// you send email from another address
+			msg.setFrom(this.toAddress);
+			msg.setTo(this.toAddress);
+			msg.setSubject(contactSubmission.getSubject());
+			msg.setText("Dear Jeff,\n\nThere is a new submission on from the contact form on jeffsweb.site\n"
+					+ "The message is from " + contactSubmission.getName() + " (" + contactSubmission.getEmail()
+					+ "):\n\n\n" + contactSubmission.getContent()
+					+ "\n\n\nThis was an automated email from jeffsweb.site\n\nBest Wishes,\nJeff Kapochus");
+			sender.send(msg);
+			response.setSuccess(true);
 		}
-		return true;
+		catch (final Exception e) {
+			response.setSuccess(false);
+			response.setValidationMessage(e.getMessage());
+		}
+		return response;
 	}
-
 }
