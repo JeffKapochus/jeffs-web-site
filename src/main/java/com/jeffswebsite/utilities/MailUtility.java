@@ -12,7 +12,8 @@ public class MailUtility {
 
 	private static final String HOST = System.getenv().get("jeffswebsite.mail.host");
 	private static final int PORT = Integer.parseInt(System.getenv().get("jeffswebsite.mail.port"));
-	private static final boolean SSL_FLAG = true;
+	private static final boolean SSL_ENABLED = true;
+	private static final boolean STARTTLS_ENABLED = true;
 	private static final String USERNAME = System.getenv().get("jeffswebsite.mail.username");
 	private static final String PASSWORD = System.getenv().get("jeffswebsite.mail.password");
 	private static final String TO_ADDRESS = System.getenv().get("jeffswebsite.mail.toAddress");
@@ -27,7 +28,9 @@ public class MailUtility {
 			email.setHostName(HOST);
 			email.setSmtpPort(PORT);
 			email.setAuthenticator(new DefaultAuthenticator(USERNAME, PASSWORD));
-			email.setSSLOnConnect(SSL_FLAG);
+			email.setAuthentication(USERNAME, PASSWORD);
+			email.setSSLOnConnect(SSL_ENABLED);
+			email.setStartTLSEnabled(STARTTLS_ENABLED);
 			email.setFrom(contactSubmission.getEmail(), contactSubmission.getName());
 			email.setSubject(contactSubmission.getSubject());
 			email.setMsg(contactSubmission.getContent());
@@ -35,6 +38,7 @@ public class MailUtility {
 			email.addCc(CC_ADDRESS);
 			email.send();
 		} catch (final Exception e) {
+			System.err.println(e);
 			return false;
 		}
 		return true;
