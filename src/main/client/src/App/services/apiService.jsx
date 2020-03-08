@@ -1,14 +1,12 @@
-import React from 'react';
-
 export function get(URL: string, body: any = null) {
-    return await fetch(URL, "GET", body);
+    return call(URL, "GET", body);
 }
 
 export function post(URL: string, body: any) {
-    return await fetch(URL, "POST", body);
+    return call(URL, "POST", body);
 }
 
-function fetch(URL: string, protocol: string, body: any) {
+async function call(URL: string, protocol: string, jsonBody: any) {
     const response = await fetch(URL, {
         method: protocol,
         headers: {
@@ -16,8 +14,9 @@ function fetch(URL: string, protocol: string, body: any) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            ...body
+            ...jsonBody
         })
     });
-    return response;
+    let responseJson = await response.json();
+    return responseJson;
 }

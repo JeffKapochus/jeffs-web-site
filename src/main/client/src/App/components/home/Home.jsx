@@ -196,7 +196,7 @@ export class Home extends React.Component {
           textColor="black"
         >
           <h3>Contact Me</h3>
-          There will be a ContactForm here soon! For now, you can <a href="mailto:jeff.kapochus@gmail.com">send me an email</a>!
+          <ContactForm />
         </CenterMiddleSection>
       </div>
     );

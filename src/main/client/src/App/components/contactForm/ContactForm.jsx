@@ -1,32 +1,21 @@
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./ContactForm.css";
-import CAPTCHA_SITE_KEY from "../../utilities/secureVariables"
-import postContactSubmission from "../../services/contactSubmissionService"
+import {CAPTCHA_SITE_KEY} from "../../utilities/secureVariables"
+import {postContactSubmission} from "../../services/contactSubmissionService"
+import { ContactSubmission } from "../../models/contactSubmission";
+import { ContactSubmissionResponse } from "../../models/contactSubmissionResponse";
 
 export class ContactForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-      captchaToken: null
+      submission: new ContactSubmission(),
+      validationMessages: ""
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
     this.checkClientSideValid = this.checkClientSideValid.bind(this);
-  }
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
   }
   handleCaptchaChange = value => {
     this.setState({
@@ -36,14 +25,9 @@ export class ContactForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.checkClientSideValid) {
-      postContactSubmission({
-        name: this.state.name,
-        email: this.state.email,
-        subject: this.state.subject,
-        message: this.state.message,
-        createdAt: Date.now,
-        updatedAt: Date.now,
-        isActive: true
+      let response: ContactSubmissionResponse = postContactSubmission(this.state.submission);
+      this.setState({
+        validationMessages: response.validationMessage
       });
       document.getElementById("contactSubmissionConfirmation").classList.remove("hidden");
       document.getElementById("frmContact").classList.add("hidden");
@@ -54,10 +38,10 @@ export class ContactForm extends React.Component {
   }
   checkClientSideValid() {
     if (
-      this.state.name === "" ||
-      this.state.email === "" ||
-      this.state.subject === "" ||
-      this.state.message === "" ||
+      this.state.submission.name === "" ||
+      this.state.submission.email === "" ||
+      this.state.submission.subject === "" ||
+      this.state.submission.message === "" ||
       this.state.captchaToken === null
     ) {
       return false;
@@ -78,9 +62,15 @@ export class ContactForm extends React.Component {
                   <input
                     id="txtName"
                     name="name"
-                    value={this.state.name}
+                    value={this.state.submission.name}
                     type="text"
-                    onChange={this.handleInputChange}
+                    onChange={(e)=>{
+                      let tempSub = this.state.submission;
+                      tempSub.name = e.target.value;
+                      this.setState({
+                        submission: tempSub
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -92,9 +82,15 @@ export class ContactForm extends React.Component {
                   <input
                     id="txtEmail"
                     name="email"
-                    value={this.state.email}
+                    value={this.state.submission.email}
                     type="email"
-                    onChange={this.handleInputChange}
+                    onChange={(e)=>{
+                      let tempSub = this.state.submission;
+                      tempSub.email = e.target.value;
+                      this.setState({
+                        submission: tempSub
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -106,9 +102,15 @@ export class ContactForm extends React.Component {
                   <input
                     id="txtSubject"
                     name="subject"
-                    value={this.state.subject}
+                    value={this.state.submission.subject}
                     type="text"
-                    onChange={this.handleInputChange}
+                    onChange={(e)=>{
+                      let tempSub = this.state.submission;
+                      tempSub.subject = e.target.value;
+                      this.setState({
+                        submission: tempSub
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -120,9 +122,15 @@ export class ContactForm extends React.Component {
                   <textarea
                     id="txtContent"
                     name="message"
-                    value={this.state.message}
+                    value={this.state.submission.content}
                     type="text"
-                    onChange={this.handleInputChange}
+                    onChange={(e)=>{
+                      let tempSub = this.state.submission;
+                      tempSub.content = e.target.value;
+                      this.setState({
+                        submission: tempSub
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -147,6 +155,7 @@ export class ContactForm extends React.Component {
             </div>
             <div id="contactSubmissionError" className="hidden">
               <label>Something has gone wrong and your email was not properly sent. Please try again later.</label>
+              {this.state.validationMessages}
             </div>
           </div>
         </div>
