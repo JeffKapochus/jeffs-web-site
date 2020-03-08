@@ -1,9 +1,8 @@
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./ContactForm.css";
-
-const SITE_KEY = "________";
-const URL = "http://localhost:8080/contactSubmission";
+import CAPTCHA_SITE_KEY from "../../utilities/secureVariables"
+import postContactSubmission from "../../services/contactSubmissionService"
 
 export class ContactForm extends React.Component {
   constructor(props) {
@@ -19,7 +18,6 @@ export class ContactForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
     this.checkClientSideValid = this.checkClientSideValid.bind(this);
-    this.postContactSubmission = this.postContactSubmission.bind(this);
   }
   handleInputChange(event) {
     const target = event.target;
@@ -38,7 +36,15 @@ export class ContactForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.checkClientSideValid) {
-      this.postContactSubmission();
+      postContactSubmission({
+        name: this.state.name,
+        email: this.state.email,
+        subject: this.state.subject,
+        message: this.state.message,
+        createdAt: Date.now,
+        updatedAt: Date.now,
+        isActive: true
+      });
       document.getElementById("contactSubmissionConfirmation").classList.remove("hidden");
       document.getElementById("frmContact").classList.add("hidden");
     } else {
@@ -57,30 +63,6 @@ export class ContactForm extends React.Component {
       return false;
     }
     return true;
-  }
-  async postContactSubmission(){
-    const response = await fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        subject: this.state.subject,
-        content: this.state.message,
-        created_at: Date.now(),
-        updated_at: Date.now(),
-        isActive: true
-      })
-    });
-    if(response.status === 200){
-      return true;
-    }
-    else{
-      return false;
-    }
   }
   render() {
     return (
@@ -147,7 +129,7 @@ export class ContactForm extends React.Component {
               <div className="grid-12">
                 <div className="grid-12">
                   <ReCAPTCHA
-                    sitekey={SITE_KEY}
+                    sitekey={CAPTCHA_SITE_KEY}
                     onChange={this.handleCaptchaChange}
                   />
                 </div>
