@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.jeffswebsite.models.StringResponse;
+
 @Component
 @Controller("statusController")
 public class StatusController {
 	@GetMapping(value = "/")
 	@CrossOrigin(origins = { "http://localhost:3000", "108.36.194.240:3000", "http://jeffsweb.site/" })
-	public ResponseEntity<String> getStatus() {
-		return new ResponseEntity<String>(SERVICE_SUCCESS, HttpStatus.OK);
+	public ResponseEntity<StringResponse> getStatus() {
+		return new ResponseEntity<StringResponse>(new StringResponse(SERVICE_SUCCESS), HttpStatus.OK);
 	}
 }

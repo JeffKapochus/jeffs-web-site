@@ -8,8 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import com.jeffswebsite.models.StringResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StatusControllerTest {
@@ -23,10 +24,9 @@ public class StatusControllerTest {
 
 	@Test
 	public void getStatus_returnsStatusOK_underNormalConditions() {
-		final ResponseEntity<String> expected = new ResponseEntity<String>(SERVICE_SUCCESS, HttpStatus.OK);
-		final ResponseEntity<String> result = statusController.getStatus();
+		final ResponseEntity<StringResponse> result = statusController.getStatus();
 
-		assertThat(result, is(expected));
+		assertThat(result.getBody().GetResponse(), is(SERVICE_SUCCESS));
 	}
 
 }
