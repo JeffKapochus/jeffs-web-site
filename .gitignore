@@ -45,7 +45,7 @@ coverage
 node_modules/
 jspm_packages/
 build/
-src/main/client/build
+src/main/client/build/
 
 # Output of 'npm pack'
 *.tgz

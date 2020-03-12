@@ -13,9 +13,9 @@ async function call(URL: string, protocol: string, jsonBody: any) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: jsonBody != null ? JSON.stringify({
             ...jsonBody
-        })
+        }) : null
     });
     let responseJson = await response.json();
     return responseJson;

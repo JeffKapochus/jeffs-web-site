@@ -66,7 +66,7 @@ public class ContactSubmissionController {
 	}
 
 	@PostMapping("/contactSubmission")
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = { "http://localhost:3000", "108.36.194.240:3000", "http://jeffsweb.site/" })
 	public ResponseEntity<NewContactSubmissionResponse> newContactSubmission(@RequestBody ContactSubmission sub) {
 		HttpStatus status = HttpStatus.OK;
 		final NewContactSubmissionResponse response = new NewContactSubmissionResponse();
@@ -100,6 +100,7 @@ public class ContactSubmissionController {
 	}
 
 	@DeleteMapping("/contactSubmission/{id}")
+	@CrossOrigin(origins = { "http://localhost:3000", "108.36.194.240:3000", "http://jeffsweb.site/" })
 	public ResponseEntity<Boolean> removeContactSubmission(@PathVariable("id") final int id) {
 		HttpStatus status = HttpStatus.OK;
 		Boolean deleted = true;

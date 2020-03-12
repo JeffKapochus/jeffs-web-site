@@ -1,5 +1,5 @@
 import {API_URL_BASE} from "../utilities/secureVariables";
-import {get, post} from "../services/apiService"
+import {post} from "../services/apiService"
 import {ContactSubmission} from "../models/contactSubmission"
 
 export function postContactSubmission(submission: ContactSubmission): ContactSubmissionResponse {

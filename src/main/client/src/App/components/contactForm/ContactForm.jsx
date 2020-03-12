@@ -11,7 +11,8 @@ export class ContactForm extends React.Component {
     super(props);
     this.state = {
       submission: new ContactSubmission(),
-      validationMessages: ""
+      validationMessages: "",
+      sentSuccess: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
@@ -27,11 +28,19 @@ export class ContactForm extends React.Component {
     if (this.checkClientSideValid) {
       let response: ContactSubmissionResponse = postContactSubmission(this.state.submission);
       this.setState({
-        validationMessages: response.validationMessage
+        validationMessages: response.validationMessage,
+        sentSuccess: response.httpStatus === "OK" ? true : false
       });
-      document.getElementById("contactSubmissionConfirmation").classList.remove("hidden");
-      document.getElementById("frmContact").classList.add("hidden");
-    } else {
+      if (response.httpStatus === "OK") {
+        document.getElementById("contactSubmissionConfirmation").classList.remove("hidden");
+        document.getElementById("frmContact").classList.add("hidden");
+      }
+      else {
+        document.getElementById("contactSubmissionError").classList.remove("hidden");
+        document.getElementById("frmContact").classList.add("hidden");
+      }
+    }
+    else {
       document.getElementById("contactSubmissionError").classList.remove("hidden");
       document.getElementById("frmContact").classList.add("hidden");
     }

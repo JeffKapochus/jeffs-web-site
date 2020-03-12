@@ -7,6 +7,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { Home } from "./components/home/Home";
 import { Link } from "react-router-dom";
+import { Status } from "./components/status/Status"
 
 const Routes = () => (
   <BrowserRouter basename="/">
@@ -23,6 +24,7 @@ const Routes = () => (
     </div>
     <div id="routerContent">
       <Route exact path="/" component={Home} />
+      <Route exact path="/status" component={Status} />
     </div>
     <div id="footer">
       <div className="grid">
