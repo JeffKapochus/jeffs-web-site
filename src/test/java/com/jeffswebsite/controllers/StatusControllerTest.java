@@ -26,7 +26,7 @@ public class StatusControllerTest {
 	public void getStatus_returnsStatusOK_underNormalConditions() {
 		final ResponseEntity<StringResponse> result = statusController.getStatus();
 
-		assertThat(result.getBody().GetResponse(), is(SERVICE_SUCCESS));
+		assertThat(result.getBody().response, is(SERVICE_SUCCESS));
 	}
 
 }

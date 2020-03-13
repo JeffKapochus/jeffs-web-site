@@ -15,7 +15,7 @@ import com.jeffswebsite.models.StringResponse;
 @Controller("statusController")
 public class StatusController {
 	@GetMapping(value = "/")
-	@CrossOrigin(origins = { "http://localhost:3000", "108.36.194.240:3000", "http://jeffsweb.site/" })
+	@CrossOrigin(origins = { "http://localhost:3000", "108.36.194.240:3000", "http://jeffsweb.site" })
 	public ResponseEntity<StringResponse> getStatus() {
 		return new ResponseEntity<StringResponse>(new StringResponse(SERVICE_SUCCESS), HttpStatus.OK);
 	}
