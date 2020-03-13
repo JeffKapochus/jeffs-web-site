@@ -1,5 +1,5 @@
 import React from "react";
-import {getStatus} from "../../services/statusService"
+import { getStatus } from "../../services/statusService"
 
 export class Status extends React.Component {
 
@@ -7,16 +7,22 @@ export class Status extends React.Component {
     super(props);
 
     this.state = {
-      responseBody: "Community Warehouse Project Back-End is Currently Down"
+      loading: true,
+      status: ""
     };
   }
 
-  componentDidMount() {
-    let test = getStatus();
-    console.log(test);
+  async componentDidMount() {
+    let statusResponse = await getStatus();
+    if (statusResponse != null) {
+      this.setState({
+        loading: false,
+        status: statusResponse.response
+      });
+    }
   }
 
   render() {
-    return <div id="homePage">{this.state.responseBody}</div>;
+    return <div id="homePage">{this.state.loading ? "Loading..." : this.state.status}</div>;
   }
 }

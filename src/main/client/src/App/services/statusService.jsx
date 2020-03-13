@@ -1,6 +1,6 @@
 import {API_URL_BASE} from "../utilities/secureVariables";
-import {get} from "../services/apiService"
+import {get} from "./apiService"
 
-export function getStatus(): String {
+export function getStatus() {
     return get(API_URL_BASE);
 }
