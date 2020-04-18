@@ -27,6 +27,7 @@ export class ContactForm extends React.Component {
     event.preventDefault();
     if (this.checkClientSideValid) {
       let response: ContactSubmissionResponse = postContactSubmission(this.state.submission);
+      console.log(response);
       this.setState({
         validationMessages: response.validationMessage,
         sentSuccess: response.httpStatus === "OK" ? true : false

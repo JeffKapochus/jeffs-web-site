@@ -49,26 +49,34 @@ export class Home extends React.Component {
                 REST, Windows, OS X, Linux, Agile Framework, Scrum, Kanban,
                 Unity, Maven, Gradle, Apache, Tomcat
               </p>
-              <h4>Educational Backgrounds</h4>
+              <h4>Educational Background</h4>
               <p>
                 <strong>
                   Bachelor of Science in Computer Science - Graduated Magna Cum
                   Laude - 05/2018
                 </strong>
               </p>
-              <p>West Chester University, West Chester PA</p>
-              <p>
-                <strong>
-                  CompTIA A+ Certification – 2014 | Cisco IT Essentials
-                  Curriculum – 2014
-                </strong>
-              </p>
+              <p>Creative Writing Minor</p>
+              <p><a href="http://wcupa.edu/" target="_blank" rel="noopener noreferrer">West Chester University</a>, West Chester PA</p>
               <h4>Experience Highlights</h4>
+              <p>
+                <strong><a href="https://www.gamesforlove.org/" target="_blank" rel="noopener noreferrer">Games For Love</a></strong>, 501(c)(3) Non-Profit Organization
+              </p>
+              <p>
+                <strong>Gameplay Programmer (Volunteer)</strong>, 03/2020 - Present
+              </p>
+              <p>
+                Technologies: Unity, C#
+              </p>
+              <p>
+                Developed new features and core gameplay systems. Coordinated with designers, artists, and fellow engineers to help design and implement game mechanics.
+              </p>
+              <hr/>
               <p>
                 <strong>GliderTech Ltd</strong>, Clitheroe, UK (Remote 100%)
               </p>
               <p>
-                <strong>Software Engineer</strong>, 10/2019 – Present
+                <strong>Software Engineer</strong>, 10/2019 – 06/2020
               </p>
               <p>
                 Technologies: React, TypeScript, Redux, C#, .NET, MySQL, Docker, Scrum, Agile
@@ -81,6 +89,7 @@ export class Home extends React.Component {
                   Developed entirety of administrative features, including front-end UIs with React and Redux, Back-End logic with C# .Net and XUnit, and database structure with MySQL.
                 </li>
               </ul>
+              <hr/>
               <p>
                 <strong>Cerner Corporation</strong>, Malvern, PA
               </p>
@@ -110,6 +119,7 @@ export class Home extends React.Component {
                   Hibernate, MySQL, and Java model reworks.
                 </li>
               </ul>
+              <hr/>
               <p>
                 <strong>Lockheed Martin Space</strong>, King of Prussia, PA (Remote 10%)
               </p>
@@ -136,6 +146,7 @@ export class Home extends React.Component {
                   microservices
                 </li>
               </ul>
+              <hr/>
               <p>
                 <strong>West Chester University</strong>, West Chester, PA (Remote 20%)
               </p>
@@ -170,6 +181,22 @@ export class Home extends React.Component {
           textColor="white"
         >
           <h3>Programming Projects</h3>
+          <h4>Active</h4>
+          <Portfolio>
+            <PortfolioPiece
+              image={process.env.PUBLIC_URL + "/images/projectGIAM.png"}
+              title="Project GIAM (2020 - Unity)"
+              url="#"
+              extraText="Team-Based Project Built in One Month (April 2020)"
+            />
+            <PortfolioPiece
+              image={process.env.PUBLIC_URL + "/images/raidworld300x217.png"}
+              title="Project Raidworld (2020 - Unity)"
+              url="https://github.com/JeffKapochus/Project-RaidWorld"
+              extraText="Temporarily on Hold Until May 2020 Due to Project GIAM"
+            />
+          </Portfolio>
+          <h4>Inactive</h4>
           <Portfolio>
             <PortfolioPiece
               image={process.env.PUBLIC_URL + "/images/swIdle300x217.png"}
