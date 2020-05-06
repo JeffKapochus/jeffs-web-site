@@ -25,6 +25,33 @@ export class Home extends React.Component {
           <h2>Web Developer – Application Developer – Creative Writer</h2>
         </CenterMiddleSection>
         <CenterMiddleSection
+          backgroundImage={process.env.PUBLIC_URL + "/images/bg3.png"}
+          textColor="white"
+        >
+        <h3>Portfolio Highlights</h3>
+        <Portfolio>
+          <PortfolioPiece
+            image={process.env.PUBLIC_URL + "/images/orbitalDecay.png"}
+            title="Orbital Decay (2020 - Unity)"
+            url="https://jeffkapochus.itch.io/orbital-decay"
+            extraText={
+              <div>
+                <p>Built by an Internationally Distributed Team in a <em>Single Month.</em> (April 2020)</p>
+                <p>My Noteworthy Contributions:</p>
+                  <ul className="contributionList">
+                    <li>Grid System and All Movement (including pathfinding)</li>
+                    <li>Planet Orbit Mechanics</li>
+                    <li>Combat</li>
+                    <li>Procedural Generation of Levels and Seeding</li>
+                    <li>Rudimentary AI (Artifical Intelligence)</li>
+                  </ul>
+                <p><a href="https://github.com/JeffKapochus/Orbital-Decay" target="_blank" rel="noopener noreferrer">View on Github</a></p>
+              </div>
+            }
+          />
+        </Portfolio>
+        </CenterMiddleSection>
+        <CenterMiddleSection
           backgroundImage={process.env.PUBLIC_URL + "/images/bg4.png"}
           textColor="black"
         >
@@ -45,9 +72,9 @@ export class Home extends React.Component {
               <h5>Tools and Technologies:</h5>
               <p>
                 Java, Spring Boot, C#, .NET Core, ASP.NET, React, Angular,
-                jQuery, JavaScript, MySQL, SQL Server, Docker, HTML, CSS, SOAP,
+                jQuery, JavaScript, MySQL, SQL Server, Unity, Docker, HTML, CSS, SOAP,
                 REST, Windows, OS X, Linux, Agile Framework, Scrum, Kanban,
-                Unity, Maven, Gradle, Apache, Tomcat
+                Maven, Gradle, Apache, Tomcat
               </p>
               <h4>Educational Background</h4>
               <p>
@@ -59,19 +86,6 @@ export class Home extends React.Component {
               <p>Creative Writing Minor</p>
               <p><a href="http://wcupa.edu/" target="_blank" rel="noopener noreferrer">West Chester University</a>, West Chester PA</p>
               <h4>Experience Highlights</h4>
-              <p>
-                <strong><a href="https://www.gamesforlove.org/" target="_blank" rel="noopener noreferrer">Games For Love</a></strong>, 501(c)(3) Non-Profit Organization
-              </p>
-              <p>
-                <strong>Gameplay Programmer (Volunteer)</strong>, 03/2020 - Present
-              </p>
-              <p>
-                Technologies: Unity, C#
-              </p>
-              <p>
-                Developed new features and core gameplay systems. Coordinated with designers, artists, and fellow engineers to help design and implement game mechanics.
-              </p>
-              <hr/>
               <p>
                 <strong>GliderTech Ltd</strong>, Clitheroe, UK (Remote 100%)
               </p>
@@ -181,14 +195,30 @@ export class Home extends React.Component {
           textColor="white"
         >
           <h3>Programming Projects</h3>
-          <h4>Active</h4>
+          <h4>Finished</h4>
           <Portfolio>
             <PortfolioPiece
-              image={process.env.PUBLIC_URL + "/images/projectGIAM.png"}
-              title="Project GIAM (2020 - Unity)"
-              url="#"
-              extraText="Team-Based Project Built in One Month (April 2020)"
+              image={process.env.PUBLIC_URL + "/images/orbitalDecay.png"}
+              title="Orbital Decay (2020 - Unity)"
+              url="https://jeffkapochus.itch.io/orbital-decay"
+              extraText={
+                <div>
+                  <p>Built by an Internationally Distributed Team in a <em>Single Month.</em> (April 2020)</p>
+                  <p>My Noteworthy Contributions:</p>
+                    <ul className="contributionList">
+                      <li>Grid System and All Movement (including pathfinding)</li>
+                      <li>Planet Orbit Mechanics</li>
+                      <li>Combat</li>
+                      <li>Procedural Generation of Levels and Seeding</li>
+                      <li>Rudimentary AI (Artifical Intelligence)</li>
+                    </ul>
+                  <p><a href="https://github.com/JeffKapochus/Orbital-Decay" target="_blank" rel="noopener noreferrer">View on Github</a></p>
+                </div>
+              }
             />
+          </Portfolio>
+          <h4>Active</h4>
+          <Portfolio>
             <PortfolioPiece
               image={process.env.PUBLIC_URL + "/images/raidworld300x217.png"}
               title="Project Raidworld (2020 - Unity)"

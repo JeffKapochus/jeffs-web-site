@@ -9,7 +9,7 @@ export class PortfolioPiece extends React.Component {
           <img className="portfolioImage" src={this.props.image} alt={this.props.title} />
           <p>{this.props.title}</p>
         </a>
-        {this.props.extraText && <p>{this.props.extraText}</p>}
+        {this.props.extraText && <div>{this.props.extraText}</div>}
       </div>
     );
   }
