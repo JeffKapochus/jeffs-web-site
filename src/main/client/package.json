@@ -8,7 +8,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "lodash.template": "^4.5.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
